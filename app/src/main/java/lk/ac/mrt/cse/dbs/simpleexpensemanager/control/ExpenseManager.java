@@ -16,6 +16,11 @@
 
 package lk.ac.mrt.cse.dbs.simpleexpensemanager.control;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.Nullable;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,9 +38,13 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Transaction;
  * The ExpenseManager acts as the mediator when performing transactions. This is an abstract class with an abstract
  * method to setup the DAO objects depending on the implementation.
  */
-public abstract class ExpenseManager implements Serializable {
+public abstract class ExpenseManager extends SQLiteOpenHelper implements Serializable {
     private AccountDAO accountsHolder;
     private TransactionDAO transactionsHolder;
+
+    public ExpenseManager(Context context, String DATABASE_NAME, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, DATABASE_NAME, factory, version);
+    }
 
     /***
      * Get list of account numbers as String.

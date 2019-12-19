@@ -31,6 +31,7 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.InMemoryDemoExpenseManager
 
 public class MainActivity extends AppCompatActivity {
     private ExpenseManager expenseManager;
+    private PersistantExpenseManager persistantExpenseManager;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        persistantExpenseManager = new PersistantExpenseManager(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         /***  Begin generating dummy data for In-Memory implementation  ***/
-        expenseManager = new InMemoryDemoExpenseManager();
+        expenseManager = new PersistantExpenseManager(this);
         /*** END ***/
     }
 
